@@ -83,7 +83,7 @@ class Scan:
         self._proxy_ip_ = proxy_ip
         self._proxy_port_ = proxy_port
 
-        self.set_proxy_type()
+        self.set_socks_type()
 
         self._closed_ = 0
         self._opened_ = 0
@@ -98,11 +98,11 @@ class Scan:
     def get_runtime(self):
         return self._runtime_
 
-    def set_proxy_type(self, proxy_type=socks.PROXY_TYPE_HTTP):
-        self._proxy_type_ = proxy_type
+    def set_socks_type(self, socks_type=5):
+        self._socks_type_ = socks_type
 
-    def get_proxy_type(self):
-        return self._proxy_type_
+    def get_socks_type(self):
+        return self._socks_type_
 
     def set_target(self, target):
         self._target_ = target
@@ -171,6 +171,7 @@ class Scan:
         self._closed_ = closed
 
     def pscan(self, port):
+
         """
 
             Port scanning using socket connection. If exception
@@ -205,10 +206,14 @@ class Scan:
             s = socks.socksocket()
             s.settimeout(self.get_timeout())
 
-            s.set_proxy(self.get_proxy_type(),
-                        self.get_proxy_ip(),
-                        self.get_proxy_port(),
-                        True)
+            if self.get_socks_type() == 5:
+                s.set_proxy(socks.PROXY_TYPE_SOCKS5,
+                            self.get_proxy_ip(), self.get_proxy_port(),
+                            True)
+            elif self.get_socks_type() == 4:
+                s.set_proxy(socks.PROXY_TYPE_SOCKS4,
+                            self.get_proxy_ip(), self.get_proxy_port(),
+                            True)
 
             s.connect((self.get_target(), port))
 
@@ -225,6 +230,7 @@ class Scan:
             s.close()
 
     def get_info(self):
+
         """
             Return the class variables essential after the scanning
 
@@ -243,6 +249,7 @@ class Scan:
                 "Runtime": self.get_runtime()}
 
     def run(self, log):
+
         """
 
             Executes the scan after creating a threadpool and
@@ -407,6 +414,7 @@ class MultiScan:
         return self._proxy_log_
 
     def run_full_scan(self):
+
         """
 
             Run a complete scan of off a list of IPs for the entire port

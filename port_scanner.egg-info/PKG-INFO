@@ -1,0 +1,15 @@
+Metadata-Version: 1.1
+Name: port-scanner
+Version: 1.0
+Summary: Port scanning tool
+Home-page: https://github.com/rankwatch/py-port-scan/
+Author: Hari Ram, Aaditya Verma, Rankwatch, Sarthak Sawhney
+Author-email: hari16csu135@ncuindia.edu, aadityaverma1998@gmail.com,                  support@rankwatch.com, sarthaksahni@gmail.com
+License: GPL v3
+Description: UNKNOWN
+Keywords: port scanning monitoring network optimisation
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved :: GPL v3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Topic :: Networking :: Port Scanning
